@@ -1,8 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const config = require('./config');
 
-mongoose.connect('mongodb://nicho:nicho.01@ds211265.mlab.com:11265/nodejs', { useNewUrlParser: true });
+mongoose.connect(config.mongo_url, { useNewUrlParser: true });
 console.log(`
     *****************************************
     **********                     **********
@@ -17,7 +18,7 @@ app.use(bodyParser.json());
 const frutasRouter = require('./modules/frutas')(express, mongoose);
 app.use('/frutas', frutasRouter);
 
-app.listen(8000, () => {
+app.listen(config.port, () => {
     console.log(`
     *****************************************
     *******                          ********
