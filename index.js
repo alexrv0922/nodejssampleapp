@@ -2,7 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/nodejs', { useNewUrlParser: true });
+mongoose.connect('mongodb://nicho:nicho.01@ds211265.mlab.com:11265/nodejs', { useNewUrlParser: true });
 console.log(`
     *****************************************
     **********                     **********
