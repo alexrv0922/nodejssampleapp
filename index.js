@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 mongoose.connect('mongodb://localhost/nodejs', { useNewUrlParser: true });
+const frutas = require('./models/frutas')(mongoose);
 console.log(`
     *****************************************
     **********                     **********
@@ -11,10 +12,11 @@ console.log(`
     **********                     **********
     *****************************************`);
 
-app.get('/test', (req, res) => {
-    res.json({
-        data: 'something',
-        test: true
+app.get('/frutas', (req, res) => {
+    frutas.find({}, (err, docs) => {
+        if (err) throw err;
+
+        res.json(docs);
     });
 });
 
