@@ -1,10 +1,8 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 
-const app = express();
-
 mongoose.connect('mongodb://localhost/nodejs', { useNewUrlParser: true });
-const frutas = require('./models/frutas')(mongoose);
 console.log(`
     *****************************************
     **********                     **********
@@ -12,13 +10,12 @@ console.log(`
     **********                     **********
     *****************************************`);
 
-app.get('/frutas', (req, res) => {
-    frutas.find({}, (err, docs) => {
-        if (err) throw err;
+const app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-        res.json(docs);
-    });
-});
+const frutasRouter = require('./modules/frutas')(express, mongoose);
+app.use('/frutas', frutasRouter);
 
 app.listen(8000, () => {
     console.log(`
