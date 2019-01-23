@@ -16,7 +16,7 @@ module.exports = (express, mongoose) => {
         })
         .post((req, res) => {
             const body = req.body;
-            let newFruit = new frutasModel(req.body);
+            let newFruit = new frutasModel(body);
             newFruit.save((err, doc) => {
                 if (err) throw err;
                 res.json(doc);
